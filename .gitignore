@@ -1,2 +1,4 @@
 appdata.db
 frontend/node_modules
+frontend/.svelte-kit/generated
+frontend/.svelte-kit/output
