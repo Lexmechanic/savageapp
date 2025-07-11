@@ -68,11 +68,7 @@ func HandleMessage(message []byte) {
 	case "draw-card":
 		if input["id"] != nil {
 			id := int(input["id"].(float64))
-			if id >= 0 && id < len(encounter.BestiaryList) {
-				encounter.performDrawEncounterId(id)
-			} else {
-				fmt.Println("Invalid ID for drawing card:", id)
-			}
+			encounter.performDrawEncounterId(id)
 		}
 	case "select-card":
 		if input["id"] != nil && input["card_id"] != nil {
