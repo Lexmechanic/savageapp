@@ -19,7 +19,7 @@ var (
 func GetDB() *sql.DB {
 	once.Do(func() {
 		var err error
-		db, err = sql.Open("sqlite", "appdata.db")
+		db, err = sql.Open("sqlite", "sqlite/appdata.db")
 		if err != nil {
 			log.Fatalf("failed to open database: %v", err)
 		}
@@ -31,7 +31,7 @@ func Initialize() {
 	_ = GetDB()
 	m, err := migrate.New(
 		"file://db/migrations",
-		"sqlite://appdata.db",
+		"sqlite://sqlite/appdata.db",
 	)
 	if err != nil {
 		log.Fatalf("failed to create migrate instance: %v", err)

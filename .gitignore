@@ -5,3 +5,4 @@ frontend/.svelte-kit/output
 savageapp
 frontend/build
 sqlite
+db/sqllite.go
