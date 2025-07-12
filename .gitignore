@@ -1,4 +1,7 @@
-appdata.db
 frontend/node_modules
 frontend/.svelte-kit/generated
+frontend/.svelte-kit/adapter-node
 frontend/.svelte-kit/output
+savageapp
+frontend/build
+sqlite
