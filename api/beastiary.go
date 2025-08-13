@@ -42,7 +42,6 @@ func getBestiary(w http.ResponseWriter, r *http.Request) {
 		&bestiaryEntry.Vigor,
 		&bestiaryEntry.Pace,
 		&bestiaryEntry.Toughness,
-		&bestiaryEntry.Parry,
 		&bestiaryEntry.Wounds,
 		&bestiaryEntry.WoundsMax,
 		&bestiaryEntry.Size,
@@ -51,6 +50,7 @@ func getBestiary(w http.ResponseWriter, r *http.Request) {
 		&bestiaryEntry.PlayerCharacter,
 		&bestiaryEntry.Actions,
 		&bestiaryEntry.Traits,
+		&bestiaryEntry.Parry,
 	)
 	if err != nil {
 		http.Error(w, "Failed to query bestiary", http.StatusInternalServerError)
@@ -126,7 +126,6 @@ func searchBestiary(w http.ResponseWriter, r *http.Request) {
 			&bestiaryEntry.Vigor,
 			&bestiaryEntry.Pace,
 			&bestiaryEntry.Toughness,
-			&bestiaryEntry.Parry,
 			&bestiaryEntry.Wounds,
 			&bestiaryEntry.WoundsMax,
 			&bestiaryEntry.Size,
@@ -135,6 +134,7 @@ func searchBestiary(w http.ResponseWriter, r *http.Request) {
 			&bestiaryEntry.PlayerCharacter,
 			&bestiaryEntry.Actions,
 			&bestiaryEntry.Traits,
+			&bestiaryEntry.Parry,
 		)
 		if err != nil {
 			http.Error(w, "Failed to scan row: "+err.Error(), http.StatusInternalServerError)

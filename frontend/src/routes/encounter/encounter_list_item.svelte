@@ -115,8 +115,20 @@
             {/if}
         </button>
     </th>
-    <th>{encounter_bestiary.bestiary_entry.toughness}</th>
-    <th>{encounter_bestiary.bestiary_entry.parry}</th>
+    <th>
+        {#if mode == 'GM' || encounter_bestiary.bestiary_entry.player_character == true}
+            {encounter_bestiary.bestiary_entry.toughness}
+        {:else}
+            ?
+        {/if}
+    </th>
+    <th>
+        {#if mode == 'GM' || encounter_bestiary.bestiary_entry.player_character == true}
+            {encounter_bestiary.bestiary_entry.parry}
+        {:else}
+            ?
+        {/if}
+    </th>
 </tr>
 {#if show_wound_popup}
     <WoundPopup 

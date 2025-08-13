@@ -1,1 +1,3 @@
 DROP TABLE IF EXISTS bestiary
+DROP TABLE IF EXISTS skills
+DROP TABLE IF EXISTS bestiary_skills

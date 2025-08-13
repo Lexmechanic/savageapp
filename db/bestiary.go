@@ -16,7 +16,6 @@ type Bestiary struct {
 	Vigor           string         `json:"vigor"`
 	Pace            int            `json:"pace"`
 	Toughness       string         `json:"toughness"`
-	Parry           int            `json:"parry"`
 	Wounds          int            `json:"wounds"`
 	WoundsMax       int            `json:"wounds_max"`
 	Size            int            `json:"size"`
@@ -25,6 +24,7 @@ type Bestiary struct {
 	PlayerCharacter int            `json:"player_character"`
 	Actions         string         `json:"actions"`
 	Traits          string         `json:"traits"`
+	Parry           string         `json:"parry"`
 }
 
 type BestiaryJson struct {
@@ -37,7 +37,6 @@ type BestiaryJson struct {
 	Vigor           string               `json:"vigor"`
 	Pace            int                  `json:"pace"`
 	Toughness       string               `json:"toughness"`
-	Parry           int                  `json:"parry"`
 	Wounds          int                  `json:"wounds"`
 	WoundsMax       int                  `json:"wounds_max"`
 	Size            int                  `json:"size"`
@@ -46,6 +45,7 @@ type BestiaryJson struct {
 	Skills          []BestiarySkillsJson `json:"skills"`
 	Actions         []Action             `json:"actions"`
 	Traits          []Trait              `json:"traits"`
+	Parry           string               `json:"parry"`
 }
 
 type Action struct {

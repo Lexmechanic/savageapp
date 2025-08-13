@@ -110,7 +110,6 @@ func (e *Encounter) AddBestiary(beastiaryId int) {
 		&bestiaryEntry.Vigor,
 		&bestiaryEntry.Pace,
 		&bestiaryEntry.Toughness,
-		&bestiaryEntry.Parry,
 		&bestiaryEntry.Wounds,
 		&bestiaryEntry.WoundsMax,
 		&bestiaryEntry.Size,
@@ -119,6 +118,7 @@ func (e *Encounter) AddBestiary(beastiaryId int) {
 		&bestiaryEntry.PlayerCharacter,
 		&bestiaryEntry.Actions,
 		&bestiaryEntry.Traits,
+		&bestiaryEntry.Parry,
 	)
 	if err != nil {
 		fmt.Println("Failed to query bestiary", err.Error())

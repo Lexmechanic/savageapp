@@ -94,7 +94,7 @@
             spirit: "d4+0",
             strength: "d4+0",
             vigor: "d4+0",
-            parry: 2,
+            parry: "2(0)",
             toughness: "2(0)",
             size: 0,
             pace: 6,
@@ -254,7 +254,7 @@
                             <th>Parry:</th>
                             <th>                
                                 <input
-                                    type="number"
+                                    type="text"
                                     bind:value={bestiaryEntry.parry}
                                     class="bestiary-name-input"
                                     placeholder="Parry"
