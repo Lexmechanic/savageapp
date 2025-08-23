@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 	"sync"
 
 	"github.com/golang-migrate/migrate/v4"
@@ -19,6 +20,12 @@ var (
 func GetDB() *sql.DB {
 	once.Do(func() {
 		var err error
+		//Check if sqlite directory exists, if not create it
+		_, err = os.Stat("sqlite")
+		if os.IsNotExist(err) {
+			os.MkdirAll("sqlite", 0755)
+		}
+
 		db, err = sql.Open("sqlite", "sqlite/appdata.db")
 		if err != nil {
 			log.Fatalf("failed to open database: %v", err)
@@ -29,6 +36,7 @@ func GetDB() *sql.DB {
 
 func Initialize() {
 	_ = GetDB()
+
 	m, err := migrate.New(
 		"file://db/migrations",
 		"sqlite://sqlite/appdata.db",
