@@ -1,6 +1,7 @@
 <script>
-    import { RiHeart3Fill, RiHeart3Line, RiEyeLine, RiEyeOffLine, RiHeartPulseFill, RiHeartPulseLine, RiHand, RiFileCopyFill } from 'svelte-remixicon';
+    import { RiStickyNoteAddLine, RiHeart3Fill, RiHeart3Line, RiEyeLine, RiEyeOffLine, RiHeartPulseFill, RiHeartPulseLine, RiHand, RiFileCopyFill } from 'svelte-remixicon';
     import WoundPopup from "./wound_popup.svelte";
+    import TagPopup from "./tag_popup.svelte";
     import Card from "./card.svelte";
     let {
         encounter_bestiary = $bindable(),
@@ -12,12 +13,33 @@
         mode
     } = $props();
     let show_wound_popup = $state(false);
+    let show_tag_popup = $state(false);
     let temp
 
     function showWoundPopup() {
         if(mode === "GM") {
            show_wound_popup = true; 
         } 
+    }
+
+    function showTagPopup() {
+           show_tag_popup = true; 
+    }
+
+    function addTag(new_tag) {
+        if (!encounter_bestiary.tags) {
+            encounter_bestiary.tags = [];
+        }
+        encounter_bestiary.tags.push(new_tag);
+        updateEncouterEntry(encounter_bestiary);
+    }
+
+    function deleteTag({tag_index}) {
+        if (!encounter_bestiary.tags || tag_index < 0 || tag_index >= encounter_bestiary.tags.length) {
+            return; // Invalid index
+        }
+        encounter_bestiary.tags.splice(tag_index, 1);
+        updateEncouterEntry(encounter_bestiary);
     }
 
     function toggleHidden() {
@@ -73,19 +95,42 @@
     </th>
     <th>
         <div class="vertical-buttons">
-            {#if mode === "GM" || encounter_bestiary.bestiary_entry.player_character == true || encounter_bestiary.hold == true}
-            <button 
-                class={encounter_bestiary.hold ? "action_button_down" : "action_button"}
-                title="Hold toggle"
-                onclick={() => toggleHold() }
-            >
-                <RiHand size=20/>
+            {#each encounter_bestiary.tags as tag, tag_index}
+                <button class="round-button-with-x">
+                    {tag}
+                <span class="close-icon" onclick={() => deleteTag({tag_index})}>&times;</span>
             </button>
-            {/if}
-            {#if mode === "GM" || encounter_bestiary.bestiary_entry.player_character == true}
-                <button class="action_button" title="Draw another card" onclick={() => drawCardForEntry(encounter_bestiary.id)}><RiFileCopyFill size=20/></button>
-            {/if}
+            {/each}
         </div>
+    </th>
+    <th>
+        <div class="card-row">
+            <div class="vertical-buttons">
+                {#if mode === "GM" || encounter_bestiary.bestiary_entry.player_character == true || encounter_bestiary.hold == true}
+                <button 
+                    class={encounter_bestiary.hold ? "action_button_down" : "action_button"}
+                    title="Hold toggle"
+                    onclick={() => toggleHold() }
+                >
+                    <RiHand size=20/>
+                </button>
+                {/if}
+
+                {#if mode === "GM" || encounter_bestiary.bestiary_entry.player_character == true}
+                    <button class="action_button" title="Draw another card" onclick={() => drawCardForEntry(encounter_bestiary.id)}><RiFileCopyFill size=20/></button>
+                {/if}
+            </div>
+            <div class="vertical-buttons">
+                <button
+                    class="action_button"
+                    title="Add Tag"
+                    onclick={() => showTagPopup() }            
+                >
+                    <RiStickyNoteAddLine size=20/>
+                </button>                 
+            </div>            
+        </div>
+
     </th>
     <th class="card-row">
         {#each encounter_bestiary.cards as card, card_index}
@@ -137,7 +182,34 @@
     on:close={() => {show_wound_popup = false}} />
 {/if}
 
+{#if show_tag_popup}
+    <TagPopup 
+    addTag={addTag}
+    on:close={() => {show_tag_popup = false}} />
+{/if}
+
 <style>
+
+.round-button-with-x {
+  display: flex; /* Use flexbox to align items */
+  align-items: center; /* Vertically center content */
+  justify-content: space-between; /* Space out content and 'X' */
+  padding: 5px 10px; /* Adjust padding as needed */
+  background: #007acc; /* Example background color */
+  color: white;
+  border: none;
+  border-radius: 20px; /* Adjust for desired roundness */
+  cursor: pointer;
+  font-size: 16px;
+  position: relative; /* Needed for positioning the close-icon */
+}
+
+.round-button-with-x .close-icon {
+  font-size: 20px; /* Size of the 'X' */
+  margin-left: 10px; /* Space between button text and 'X' */
+  line-height: 1; /* Ensures 'X' aligns well */
+}
+
 tr.even {
     background: #f9f9f9;
 }
@@ -163,7 +235,7 @@ th {
 .vertical-buttons {
     display: flex;
     flex-direction: column;
-    gap: 0.3em;
+    gap: 0.0em;
     align-items: flex-start;
 }
 

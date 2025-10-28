@@ -26,6 +26,7 @@ type EncounterBestiary struct {
 	BestiaryEntry database.BestiaryJson `json:"bestiary_entry"`
 	Shaken        bool                  `json:"shaken"`
 	Hold          bool                  `json:"hold"`
+	Tags          []string              `json:"tags"`
 }
 
 func GetEncounter() *Encounter {

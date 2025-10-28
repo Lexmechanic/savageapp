@@ -21,6 +21,7 @@
         ws.onmessage = (event) => {
             try {
                 encounter = JSON.parse(event.data);
+                console.log("Received encounter data:", encounter);
             } catch (e) {
                 console.error("Invalid JSON from server:", event.data);
             }
@@ -144,6 +145,7 @@
             <tr class="encounter_table_header">
                 <th>Name</th>
                 <th></th>
+                <th></th>
                 <th>Draws</th>
                 <th>Wounds</th>
                 <th><RiShieldCrossLine/></th>
@@ -180,6 +182,8 @@
 {/if}
 
 <style>
+
+
 
 .control_area {
     z-index: 1000;

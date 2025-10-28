@@ -132,6 +132,7 @@ func (e *Encounter) AddBestiary(beastiaryId int) {
 		Shaken:        false,
 		Cards:         []int{},
 		Hold:          false,
+		Tags:          []string{},
 	}
 	e.EntryCounter++
 
@@ -191,6 +192,7 @@ func (e *Encounter) UpdateBestiary(updatedEntry EncounterBestiary) {
 			e.BestiaryList[i].Hold = updatedEntry.Hold
 			e.BestiaryList[i].BestiaryEntry.Wounds = updatedEntry.BestiaryEntry.Wounds
 			e.BestiaryList[i].BestiaryEntry.Name = updatedEntry.BestiaryEntry.Name
+			e.BestiaryList[i].Tags = updatedEntry.Tags
 			break
 		}
 	}
