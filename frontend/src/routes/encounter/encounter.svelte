@@ -140,6 +140,10 @@
 </script>
 
 <div class={mode === "GM" ? 'encounter_area' : 'encounter_area_player'}>
+    {#if mode === "Player" && encounter.started === true}
+        <p>Round: {encounter.round}</p>
+    {/if}
+
     <table class="encounter_table">
         <thead>
             <tr class="encounter_table_header">

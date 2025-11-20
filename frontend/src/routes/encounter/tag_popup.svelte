@@ -1,5 +1,6 @@
 <script>
     import { self, createBubbler, preventDefault } from 'svelte/legacy';
+    import { onMount } from 'svelte';
 
     const bubble = createBubbler();
     import { RiCheckLine } from 'svelte-remixicon';
@@ -10,6 +11,14 @@
     } = $props();
     
     let tagInput = $state("");
+    let inputElement;
+
+    onMount(() => {
+        if (inputElement) {
+            inputElement.focus();
+            inputElement.select();
+        }
+    });
 
     function confirm() {
         addTag(tagInput);
@@ -26,6 +35,7 @@
 <div class="popup-backdrop" onclick={close}>
     <div class="popup-content" onclick={(event) => event.stopPropagation()}>
         <input
+            bind:this={inputElement}
             type="text"
             bind:value={tagInput}
             placeholder="Tag Text..."
